@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İklim Değişikliği Üzerine Bilmeniz Gereken Herşey</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f9fa;
+        }
+        
+        header {
+            background-color: #2c7873;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        
+        nav {
+            background-color: #6fb98f;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: #2c7873;
+        }
+        
+        main {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        @media (min-width: 768px) {
+            main {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+        
+        article {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        aside {
+            background-color: #e6f3f2;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #2c7873;
+            color: white;
+            border-radius: 8px;
+        }
+        
+        .infographic {
+            background-color: #e6f3f2;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .infographic img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .progress-item {
+            background-color: #e6f3f2;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #2c7873;
+        }
+
+        .decomposition-item {
+            background-color: white;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .decomposition-icon {
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+        }
+        .decomposition-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .decomposition-time {
+            margin-left: auto;
+            background-color: #e6f3f2;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            white-space: nowrap;
+        }
+    </style>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>İklim Değişikliği Üzerine Bilmeniz Gereken Herşey</h1>
+        <p>Bilim, Etkiler ve Çözümler</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#temel">Temel Bilgiler</a></li>
+            <li><a href="#nedenler">Nedenler</a></li>
+            <li><a href="#etkiler">Etkiler</a></li>
+            <li><a href="#cozumler">Çözümler</a></li>
+            <li><a href="#ilerleme">Ne Yapıldı?</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <article>
+            <section id="temel">
+                <h2>İklim Değişikliği Nedir?</h2>
+                <p>İklim değişikliği, küresel iklimdeki uzun vadeli değişiklikleri ifade eder. İklim; güneş, okyanuslar, rüzgarlar, yağmur, ormanlar ve insan faaliyetlerinin birbirine bağlı sistemidir.</p>
+                
+                <div class="infographic">
+                    <canvas id="sicaklikGrafik"></canvas>
+                    <p>Küresel sıcaklık artışı (1880-2023)</p>
+                </div>
+            </section>
+            
+            <section id="nedenler">
+                <h2>İklim Değişikliğinin Nedenleri</h2>
+                <p>Günümüzdeki iklim değişikliğinin ana nedeni sera etkisinin insan faaliyetleriyle artmasıdır:</p>
+                <ul>
+                    <li><strong>Karbondioksit (CO₂):</strong> Fosil yakıtlar ve ormansızlaşma</li>
+                    <li><strong>Metan (CH₄):</strong> Hayvancılık ve petrol çıkarma</li>
+                    <li><strong>Azot oksit (N₂O):</strong> Gübreler ve endüstri</li>
+                </ul>
+                
+                <div class="infographic">
+                    <canvas id="seraGazlari"></canvas>
+                    <p>Sera gazı emisyon kaynakları (2023)</p>
+                </div>
+            </section>
+            
+            <section id="etkiler">
+                <h2>İklim Değişikliğinin Etkileri</h2>
+                <ul>
+                    <li>Aşırı hava olayları (seller, kuraklıklar)</li>
+                    <li>Deniz seviyesinin yükselmesi</li>
+                    <li>Biyoçeşitlilik kaybı</li>
+                    <li>Tarımsal verimde düşüş</li>
+                </ul>
+            </section>
+            
+            <section id="cozumler">
+                <h2>Çözümler ve Eylemler</h2>
+                <h3>Bireysel Çözümler</h3>
+                <ul>
+                    <li>Enerji tasarruflu cihazlar kullanın</li>
+                    <li>Toplu taşıma veya bisiklet kullanın</li>
+                    <li>Bitki bazlı beslenmeye ağırlık verin</li>
+                </ul>
+                
+                <h3>Küresel Çözümler</h3>
+                <ul>
+                    <li>Yenilenebilir enerjiye geçiş</li>
+                    <li>Ormanların korunması</li>
+                    <li>Sürdürülebilir tarım</li>
+                </ul>
+            </section>
+
+            <!-- Yeni Bölüm: Ne Yapıldı? -->
+            <section id="ilerleme">
+                <h2>2010'dan Beri Neler Yapıldı?</h2>
+                
+                <div class="progress-item">
+                    <h3>2015 - Paris Anlaşması</h3>
+                    <p>195 ülke, küresel sıcaklık artışını 2°C'nin altında tutmayı taahhüt etti.</p>
+                </div>
+                
+                <div class="progress-item">
+                    <h3>2010-2023 - Yenilenebilir Enerji Patlaması</h3>
+                    <p>Güneş enerjisi maliyetleri %80 düştü. Rüzgar kapasitesi 3 kat arttı.</p>
+                </div>
+                
+                <div class="infographic">
+                    <canvas id="yenilenebilirEnerji"></canvas>
+                    <p>Yenilenebilir enerji büyümesi (2010-2023)</p>
+                </div>
+            </section>
+        </article>
+        
+        <aside>
+            <h3>Hızlı Bilgiler</h3>
+            <ul>
+                <li>Türkiye'de sıcaklıklar 1970'lerden beri 1.5°C arttı</li>
+                <li>Dünyada 2023 en sıcak yıl rekorunu kırdı</li>
+                <li>Deniz seviyesi 1993'ten beri 9 cm yükseldi</li>
+            </ul>
+
+            <h3>Türkiye'den Haberler</h3>
+            <ul>
+                <li>2023: Yenilenebilir enerji %45 paya ulaştı</li>
+                <li>2021: Paris Anlaşması onaylandı</li>
+                <li>2020: Sıfır Atık Projesi başlatıldı</li>
+            </ul>
+            
+            <h3>Doğada Çözünme Süreleri</h3>
+            <div class="decomposition-item">
+                <div class="decomposition-icon">
+                    <img src="images/plastic-bottle.jpeg" alt="Plastik şişe">
+                </div>
+                <span class="material-name">Plastik Şişe</span>
+                <span class="decomposition-time">450 yıl</span>
+            </div>
+            <div class="decomposition-item">
+                <div class="decomposition-icon">
+                    <img src="images/aluminium-can.jpeg" alt="Alüminyum kutu">
+                </div>
+                <span class="material-name">Alüminyum Kutu</span>
+                <span class="decomposition-time">200-500 yıl</span>
+            </div>
+            <div class="decomposition-item">
+                <div class="decomposition-icon">
+                    <img src="images/glass-bottle.jpeg" alt="Cam şişe">
+                </div>
+                <span class="material-name">Cam Şişe</span>
+                <span class="decomposition-time">1 milyon+ yıl</span>
+            </div>
+            <div class="decomposition-item">
+                <div class="decomposition-icon">
+                    <img src="images/styrofoam.jpeg" alt="Strafor">
+                </div>
+                <span class="material-name">Strafor</span>
+                <span class="decomposition-time">Asla çözünmez</span>
+            </div>
+            <div class="decomposition-item">
+                <div class="decomposition-icon">
+                    <img src="images/paper-towel.jpeg" alt="Kağıt havlu">
+                </div>
+                <span class="material-name">Kağıt Havlu</span>
+                <span class="decomposition-time">2-4 hafta</span>
+            </div>
+            <div class="decomposition-item">
+                <div class="decomposition-icon">
+                    <img src="images/fruit-waste.jpeg" alt="Meyve atığı">
+                </div>
+                <span class="material-name">Meyve Atığı</span>
+                <span class="decomposition-time">6 ay</span>
+            </div>
+            
+        </aside>
+    </main>
+    
+    <footer>
+        <p>© 2023 İklim Değişikliği Rehberi. Kaynaklar: NASA, IPCC, TÜBİTAK.</p>
+    </footer>
+
+    <script>
+        // Sıcaklık Grafiği
+        new Chart(document.getElementById('sicaklikGrafik'), {
+            type: 'line',
+            data: {
+                labels: ['1900', '1950', '1980', '2000', '2020', '2023'],
+                datasets: [{
+                    label: 'Sıcaklık Anomalisi (°C)',
+                    data: [-0.2, 0.1, 0.3, 0.6, 1.0, 1.1],
+                    borderColor: '#e74c3c',
+                    backgroundColor: 'rgba(231, 76, 60, 0.1)'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: { display: true, text: 'Küresel Sıcaklık Artışı' }
+                }
+            }
+        });
+
+        // Sera Gazları Grafiği
+        new Chart(document.getElementById('seraGazlari'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Enerji', 'Tarım', 'Sanayi', 'Ulaşım', 'Binalar'],
+                datasets: [{
+                    data: [73, 12, 8, 5, 2],
+                    backgroundColor: [
+                        '#2c7873',
+                        '#6fb98f',
+                        '#e74c3c',
+                        '#3498db',
+                        '#f39c12'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: { display: true, text: 'Sera Gazı Kaynakları (2023)' }
+                }
+            }
+        });
+
+        // Yenilenebilir Enerji Grafiği
+        new Chart(document.getElementById('yenilenebilirEnerji'), {
+            type: 'bar',
+            data: {
+                labels: ['2010', '2015', '2020', '2023'],
+                datasets: [
+                    {
+                        label: 'Güneş Enerjisi (GW)',
+                        data: [40, 227, 760, 1050],
+                        backgroundColor: '#f39c12'
+                    },
+                    {
+                        label: 'Rüzgar Enerjisi (GW)',
+                        data: [198, 432, 733, 900],
+                        backgroundColor: '#3498db'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: { display: true, text: 'Yenilenebilir Enerji Kapasitesi' }
+                },
+                scales: {
+                    x: { stacked: true },
+                    y: { stacked: true }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
